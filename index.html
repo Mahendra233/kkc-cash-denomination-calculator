@@ -1,11 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="theme-color" content="#3699d5"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>Karde Krishna Chits Private Limited | Cash Denomination Calculator</title>
 <style>
 :root{--blue:#3699d5;--blue-dark:#237cb5;--ink:#405466;--muted:#758493;--line:#dce3e8;--red:#e74c3c;--bg:#f5f8fa;--white:#fff}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;-webkit-font-smoothing:antialiased;padding-bottom:env(safe-area-inset-bottom)}button,input{font:inherit}button{cursor:pointer;touch-action:manipulation}.app{max-width:760px;margin:0 auto;min-height:100dvh;background:#fff;box-shadow:0 0 20px #1425360c}.topbar{background:var(--blue);color:white;padding:calc(12px + env(safe-area-inset-top)) 16px 15px;text-align:center}.brand{display:flex;align-items:center;justify-content:center;gap:10px}.logo{width:54px;height:54px;object-fit:contain;background:#fff;border-radius:50%;padding:3px}.brand-name{font-size:clamp(15px,3.8vw,20px);font-weight:750;line-height:1.2}.subtitle{margin-top:5px;font-size:17px;font-weight:600;letter-spacing:.2px}.top-actions{display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-size:15px}.top-actions button{background:transparent;border:0;color:#fff;padding:8px 10px;border-radius:8px}.top-actions button:active{background:#ffffff22}.rows{padding:12px 12px 20px}.denom-row{display:grid;grid-template-columns:minmax(60px,82px) minmax(0,1fr) minmax(78px,105px);gap:8px;align-items:center;padding:9px 0;border-bottom:1px solid #e6eaed;min-height:69px}.denom-label{font-size:clamp(17px,4.3vw,22px);font-weight:650;white-space:nowrap}.count-input{width:100%;height:48px;min-width:0;border:1px solid #d8dee3;border-radius:11px;text-align:center;font-size:20px;color:var(--ink);background:#fff;outline:none;box-shadow:inset 0 1px 2px #00000004}.count-input:focus{border-color:var(--blue);box-shadow:0 0 0 3px #3699d51c}.line-total{text-align:right;font-size:clamp(15px,3.7vw,19px);font-weight:650;white-space:nowrap}.row-controls{grid-column:1/-1;display:none;gap:8px;padding:0 0 8px}.edit-mode .row-controls{display:flex}.small-btn{border:1px solid var(--line);background:#f7f9fa;border-radius:8px;padding:6px 10px;color:var(--ink)}.add-row{display:none;width:100%;border:1px dashed #a8cce3;background:#f2f9fe;color:var(--blue-dark);padding:12px;border-radius:10px;margin-top:12px;font-weight:650}.edit-mode .add-row{display:block}.summary{border-top:2px solid #cfd8df;background:#fff;padding:13px 14px 14px;text-align:center;position:sticky;bottom:0;z-index:5;box-shadow:0 -4px 15px #172a3a0a}.total-label{font-size:17px}.total-amount{font-size:clamp(27px,7vw,36px);font-weight:750;color:var(--ink);margin-left:8px;letter-spacing:-.5px;overflow-wrap:anywhere}.words{font-size:15px;line-height:1.35;margin:7px 0 11px;color:#566879}.date-line{font-size:12px;color:var(--muted);margin-bottom:10px}.actions{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.action{border:0;border-radius:14px;background:var(--blue);color:white;min-height:52px;font-size:18px;font-weight:650;padding:10px 5px}.action:active{filter:brightness(.92)}.action.clear{background:var(--red)}.action.secondary{background:var(--blue-dark)}.note{padding:10px 15px;text-align:center;color:#8795a1;font-size:12px}.toast{position:fixed;left:50%;bottom:calc(165px + env(safe-area-inset-bottom));transform:translateX(-50%);background:#1e2935;color:white;border-radius:10px;padding:11px 15px;max-width:90%;text-align:center;z-index:30;display:none;box-shadow:0 5px 24px #0003}.modal-backdrop{position:fixed;inset:0;background:#10192388;display:none;align-items:center;justify-content:center;padding:18px;z-index:40}.modal{background:#fff;border-radius:16px;padding:20px;width:min(100%,420px);max-height:80dvh;overflow:auto}.modal h2{margin:0 0 12px;font-size:20px}.modal button{border:0;border-radius:9px;padding:10px 13px}.saved-item{border:1px solid var(--line);border-radius:10px;padding:12px;margin:9px 0;display:flex;justify-content:space-between;gap:10px;align-items:center}.saved-item strong{display:block}.saved-item small{color:var(--muted)}.empty{color:var(--muted);text-align:center;padding:18px 0}.hidden{display:none!important}@media(min-width:600px){.rows{padding:18px 24px 24px}.denom-row{grid-template-columns:100px minmax(0,1fr) 125px;min-height:76px}.count-input{height:52px}.summary{padding:18px 24px}.action{min-height:56px}.logo{width:62px;height:62px}}
+/* KKC compact single-screen layout + prevent accidental zoom */
+html, body { width:100%; height:100%; height:100dvh; margin:0; overflow:hidden; overscroll-behavior:none; -webkit-text-size-adjust:100%; touch-action:pan-x pan-y; }
+body { padding:0; }
+.app { width:100%; max-width:760px; height:100dvh; min-height:0; margin:0 auto; display:flex; flex-direction:column; overflow:hidden; }
+.topbar { flex:0 0 auto; padding:calc(5px + env(safe-area-inset-top)) 10px 5px; }
+.brand { gap:7px; }
+.logo { width:39px; height:39px; padding:2px; }
+.brand-name { font-size:clamp(13px,3.5vw,17px); line-height:1.12; }
+.subtitle { margin-top:3px; font-size:13px; line-height:1.1; }
+.top-actions { margin-top:3px; font-size:12px; }
+.top-actions button { padding:3px 7px; }
+#rows.rows { flex:1 1 auto; min-height:0; padding:2px 10px; display:flex; flex-direction:column; justify-content:space-evenly; overflow:hidden; }
+.denom-row { flex:1 1 0; min-height:0; padding:1px 0; grid-template-columns:minmax(48px,68px) minmax(0,1fr) minmax(65px,83px); gap:6px; }
+.denom-label { font-size:clamp(13px,3.6vw,17px); line-height:1; }
+.count-input { height:clamp(29px,5.1dvh,42px); border-radius:9px; font-size:16px; padding:2px 5px; }
+.line-total { font-size:clamp(12px,3.2vw,16px); line-height:1; }
+.summary { flex:0 0 auto; position:static; padding:4px 10px calc(4px + env(safe-area-inset-bottom)); box-shadow:0 -2px 8px #172a3a08; }
+.total-label { font-size:13px; line-height:1.1; }
+.total-amount { font-size:clamp(22px,6vw,29px); margin-left:4px; }
+.words { font-size:12px; line-height:1.15; margin:2px 0 4px; }
+.date-line { font-size:10px; margin-bottom:5px; }
+.actions { gap:5px; }
+.action { min-height:36px; border-radius:10px; font-size:14px; padding:5px 3px; }
+.actions .action:last-child { grid-column:1/-1; min-height:34px; }
+.note { display:none; }
+.toast { bottom:calc(125px + env(safe-area-inset-bottom)); }
+button, input { touch-action:manipulation; }
+@media (max-height:700px) {
+ .topbar { padding-top:calc(3px + env(safe-area-inset-top)); padding-bottom:3px; }
+ .logo { width:33px; height:33px; }
+ .subtitle { font-size:12px; }
+ .top-actions { margin-top:1px; }
+ .count-input { height:clamp(26px,4.6dvh,34px); }
+ .summary { padding-top:3px; padding-bottom:calc(3px + env(safe-area-inset-bottom)); }
+ .action { min-height:31px; font-size:13px; }
+ .actions .action:last-child { min-height:29px; }
+}
+@media (min-width:600px) {
+ .topbar { padding:8px 14px 7px; }
+ .logo { width:42px; height:42px; }
+ .brand-name { font-size:18px; }
+ .subtitle { font-size:14px; }
+ .top-actions { font-size:13px; margin-top:4px; }
+ #rows.rows { padding:3px 18px; }
+ .denom-row { grid-template-columns:90px minmax(0,1fr) 105px; }
+ .denom-label { font-size:17px; }
+ .line-total { font-size:16px; }
+ .count-input { height:clamp(30px,5dvh,42px); }
+ .summary { padding:5px 18px; }
+ .action { min-height:36px; }
+ .actions .action:last-child { min-height:34px; }
+}
+/* Hide the add-row container in normal use so it does not waste screen height. */
+.app:not(.edit-mode) > .rows[style] { display:none; }
+.app.edit-mode > .rows[style] { display:block; flex:0 0 auto; padding:0 10px; }
+/* Extra rows are only needed while editing; allow that mode to scroll. */
+.app.edit-mode #rows.rows { overflow-y:auto; }
+
 </style></head><body>
 <div class="app" id="app">
 <header class="topbar">
@@ -26,6 +84,22 @@
 <div class="toast" id="toast" role="status"></div>
 <div class="modal-backdrop" id="modalBackdrop"><div class="modal"><h2 id="modalTitle">Saved counts</h2><div id="modalContent"></div><div style="display:flex;justify-content:flex-end;gap:8px;margin-top:15px"><button id="closeModal" style="background:#e9eef2;color:#34495a">Close</button></div></div></div>
 <script>
+// Prevent accidental pinch and double-tap zoom while preserving ordinary taps and typing.
+(function lockAccidentalZoom() {
+  document.addEventListener('gesturestart', function (e) { e.preventDefault(); }, { passive: false });
+  document.addEventListener('gesturechange', function (e) { e.preventDefault(); }, { passive: false });
+  document.addEventListener('gestureend', function (e) { e.preventDefault(); }, { passive: false });
+  document.addEventListener('touchmove', function (e) {
+    if (e.touches && e.touches.length > 1) e.preventDefault();
+  }, { passive: false });
+  let lastTouchEnd = 0;
+  document.addEventListener('touchend', function (e) {
+    const now = Date.now();
+    if (now - lastTouchEnd <= 280) e.preventDefault();
+    lastTouchEnd = now;
+  }, { passive: false });
+})();
+
 const DEFAULTS=[500,200,100,50,20,10,5,2,1];
 let denominations=DEFAULTS.map((value,i)=>({id:'d'+i,value,count:0}));
 let editMode=false;
